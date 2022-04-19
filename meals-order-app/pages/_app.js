@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { MealsOrderProvider } from "../context/MealsOrderProvider";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <MealsOrderProvider>
+      <Component {...pageProps} />
+    </MealsOrderProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
