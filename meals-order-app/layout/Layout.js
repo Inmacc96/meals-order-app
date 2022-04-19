@@ -5,6 +5,7 @@ export default function Layout({ children, page }) {
   return (
     <>
       <Head>
+        <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg" />
         <title>Café - {page}</title>
         <meta name="description" content="Quiosco Cafeteria" />
       </Head>
