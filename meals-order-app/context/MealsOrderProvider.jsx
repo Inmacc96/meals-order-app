@@ -5,6 +5,7 @@ const MealsOrderContext = createContext();
 
 const MealsOrderProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState({});
 
   useEffect(() => {
     const getCategories = async () => {
@@ -15,8 +16,15 @@ const MealsOrderProvider = ({ children }) => {
     getCategories();
   }, []);
 
+  const handleClickCategory = (id) => {
+    const category = categories.filter((cat) => cat.id === id);
+    setCurrentCategory(category[0]);
+  };
+
   return (
-    <MealsOrderContext.Provider value={{categories}}>
+    <MealsOrderContext.Provider
+      value={{ categories, currentCategory, handleClickCategory }}
+    >
       {children}
     </MealsOrderContext.Provider>
   );
