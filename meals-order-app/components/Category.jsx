@@ -5,10 +5,12 @@ const Category = ({ category }) => {
   const { currentCategory, handleClickCategory } = useMealsOrder();
   const { name, icon, id } = category;
   return (
-    <div
+    <button
+      type="button"
       className={`${
         currentCategory?.id === id ? "bg-amber-400" : ""
-      } flex items-center gap-4 w-full border p-5 hover:bg-amber-400`}
+      } flex items-center gap-4 w-full border p-5 hover:bg-amber-400 text-2xl font-bold hover:cursor-pointer`}
+      onClick={() => handleClickCategory(id)}
     >
       <Image
         width={70}
@@ -17,14 +19,8 @@ const Category = ({ category }) => {
         alt="Icon image"
       />
 
-      <button
-        type="button"
-        className="text-2xl font-bold hover:cursor-pointer"
-        onClick={() => handleClickCategory(id)}
-      >
-        {name}
-      </button>
-    </div>
+      {name}
+    </button>
   );
 };
 
