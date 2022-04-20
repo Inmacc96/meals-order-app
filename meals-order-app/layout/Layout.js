@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
 import ProductModal from "../components/ProductModal";
+import ProgressBar from "../components/ProgressBar";
 import { ToastContainer } from "react-toastify";
 import Modal from "react-modal";
 import useMealsOrder from "../hooks/useMealsOrder";
@@ -35,7 +36,10 @@ export default function Layout({ children, page }) {
           <Sidebar />
         </aside>
         <main className="md:8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll">
-          <div className="p-10">{children}</div>
+          <div className="p-10">
+            <ProgressBar />
+            {children}
+          </div>
         </main>
       </div>
 
