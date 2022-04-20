@@ -6,6 +6,8 @@ const MealsOrderContext = createContext();
 const MealsOrderProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState({});
+  const [product, setProduct] = useState({});
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -17,18 +19,33 @@ const MealsOrderProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    setCurrentCategory(categories[0])
-  }, [categories])
-  
+    setCurrentCategory(categories[0]);
+  }, [categories]);
 
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCurrentCategory(category[0]);
   };
 
+  const handleSetProduct = (product) => {
+    setProduct(product);
+  };
+
+  const handleChangeModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <MealsOrderContext.Provider
-      value={{ categories, currentCategory, handleClickCategory }}
+      value={{
+        categories,
+        currentCategory,
+        handleClickCategory,
+        product,
+        handleSetProduct,
+        modal,
+        handleChangeModal
+      }}
     >
       {children}
     </MealsOrderContext.Provider>
