@@ -10,6 +10,7 @@ const MealsOrderProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  const [progress, setProgress] = useState(1);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -44,13 +45,17 @@ const MealsOrderProvider = ({ children }) => {
         productState.id === product.id ? product : productState
       );
       setOrder(updatedOrder);
-      toast.success("Guardado Correctamente")
+      toast.success("Guardado Correctamente");
     } else {
       setOrder([...order, product]);
       toast.success("Agregado al Pedido");
     }
 
     setModal(false);
+  };
+
+  const handleChangeProgress = (progress) => {
+    setProgress(progress);
   };
 
   return (
@@ -65,6 +70,8 @@ const MealsOrderProvider = ({ children }) => {
         handleChangeModal,
         order,
         handleAddOrder,
+        progress,
+        handleChangeProgress,
       }}
     >
       {children}
