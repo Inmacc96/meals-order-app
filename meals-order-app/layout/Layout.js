@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
+import ProductModal from "../components/ProductModal";
 import Modal from "react-modal";
 import useMealsOrder from "../hooks/useMealsOrder";
 
@@ -35,9 +36,11 @@ export default function Layout({ children, page }) {
         </main>
       </div>
 
-      {modal && <Modal isOpen={modal} style={customStyles}>
-        <h1>Modal...</h1>
-        </Modal>}
+      {modal && (
+        <Modal isOpen={modal} style={customStyles}>
+          <ProductModal />
+        </Modal>
+      )}
     </>
   );
 }
