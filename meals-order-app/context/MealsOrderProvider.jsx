@@ -36,8 +36,16 @@ const MealsOrderProvider = ({ children }) => {
     setModal(!modal);
   };
 
-  const handleAddOrder = ({categoryId, image, ...product}) => {
-    setOrder([...order, product]);
+  const handleAddOrder = ({ categoryId, image, ...product }) => {
+    if (order.some((productState) => productState.id === product.id)) {
+      // Update quantity
+      const updatedOrder = order.map((productState) =>
+        productState.id === product.id ? product : productState
+      );
+      setOrder(updatedOrder);
+    } else {
+      setOrder([...order, product]);
+    }
   };
 
   return (
