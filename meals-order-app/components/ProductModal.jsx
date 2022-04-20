@@ -4,7 +4,7 @@ import useMealsOrder from "../hooks/useMealsOrder";
 import { formatMoney } from "../helpers";
 
 const ProductModal = () => {
-  const { product, handleChangeModal } = useMealsOrder();
+  const { product, handleChangeModal, handleAddOrder } = useMealsOrder();
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -90,6 +90,14 @@ const ProductModal = () => {
             </svg>
           </button>
         </div>
+
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          onClick={() => handleAddOrder({...product,quantity})}
+        >
+          Añadir al Pedido
+        </button>
       </div>
     </div>
   );

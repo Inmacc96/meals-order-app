@@ -8,6 +8,7 @@ const MealsOrderProvider = ({ children }) => {
   const [currentCategory, setCurrentCategory] = useState({});
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -35,6 +36,10 @@ const MealsOrderProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleAddOrder = ({categoryId, image, ...product}) => {
+    setOrder([...order, product]);
+  };
+
   return (
     <MealsOrderContext.Provider
       value={{
@@ -44,7 +49,8 @@ const MealsOrderProvider = ({ children }) => {
         product,
         handleSetProduct,
         modal,
-        handleChangeModal
+        handleChangeModal,
+        handleAddOrder,
       }}
     >
       {children}
