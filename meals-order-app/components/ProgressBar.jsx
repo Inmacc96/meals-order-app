@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import useMealsOrder from "../hooks/useMealsOrder";
 
 const progressBar = [
   { progress: 1, name: "Menú", url: "/" },
@@ -8,14 +7,13 @@ const progressBar = [
 ];
 
 const ProgressBar = () => {
-  const { handleChangeProgress, progress } = useMealsOrder();
   const router = useRouter();
 
   const calculateProgress = () => {
     let value;
-    if (progress === 1) {
+    if (router.pathname == "/") {
       value = 2;
-    } else if (progress === 2) {
+    } else if (router.pathname == "/summary") {
       value = 50;
     } else {
       value = 100;
@@ -32,7 +30,6 @@ const ProgressBar = () => {
             className="text-2xl font-bold"
             onClick={() => {
               router.push(progress.url); //Te redirigue a esa url
-              handleChangeProgress(progress.progress);
             }}
           >
             {progress.name}

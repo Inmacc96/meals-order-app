@@ -10,7 +10,6 @@ const MealsOrderProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
-  const [progress, setProgress] = useState(1);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -54,10 +53,6 @@ const MealsOrderProvider = ({ children }) => {
     setModal(false);
   };
 
-  const handleChangeProgress = (progress) => {
-    setProgress(progress);
-  };
-
   return (
     <MealsOrderContext.Provider
       value={{
@@ -70,8 +65,6 @@ const MealsOrderProvider = ({ children }) => {
         handleChangeModal,
         order,
         handleAddOrder,
-        progress,
-        handleChangeProgress,
       }}
     >
       {children}
