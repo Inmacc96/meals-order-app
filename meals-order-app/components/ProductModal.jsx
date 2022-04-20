@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import useMealsOrder from "../hooks/useMealsOrder";
 import { formatMoney } from "../helpers";
 
 const ProductModal = () => {
-  const { product, handleChangeModal, handleAddOrder } = useMealsOrder();
+  const { product, handleChangeModal, handleAddOrder, order } = useMealsOrder();
   const [quantity, setQuantity] = useState(1);
+  const [editQuantity, setEditQuantity] = useState(false);
+
+  // Check if the product of the current modal is in the order
+  useEffect(() => {
+    if (order.some((productState) => productState.id === product.id)) {
+      const productToEdit = order.find(
+        (productState) => productState.id === product.id
+      );
+      setEditQuantity(true);
+      setQuantity(productToEdit.quantity);
+    }
+  }, [product, order]);
 
   return (
     <div className="md:flex gap-10">
@@ -94,9 +106,9 @@ const ProductModal = () => {
         <button
           type="button"
           className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
-          onClick={() => handleAddOrder({...product,quantity})}
+          onClick={() => handleAddOrder({ ...product, quantity })}
         >
-          Añadir al Pedido
+          {editQuantity ? "Guardar Cambios" : "Añadir al Pedido"}
         </button>
       </div>
     </div>

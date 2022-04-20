@@ -46,6 +46,8 @@ const MealsOrderProvider = ({ children }) => {
     } else {
       setOrder([...order, product]);
     }
+
+    setModal(false)
   };
 
   return (
@@ -58,6 +60,7 @@ const MealsOrderProvider = ({ children }) => {
         handleSetProduct,
         modal,
         handleChangeModal,
+        order,
         handleAddOrder,
       }}
     >
