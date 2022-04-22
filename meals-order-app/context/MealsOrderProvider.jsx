@@ -53,6 +53,13 @@ const MealsOrderProvider = ({ children }) => {
     setModal(false);
   };
 
+  const handleEditQuantity = (id) => {
+    const updatedProduct = order.filter((product) => product.id === id);
+    setProduct(updatedProduct[0]);
+
+    setModal(!modal);
+  };
+
   return (
     <MealsOrderContext.Provider
       value={{
@@ -65,6 +72,7 @@ const MealsOrderProvider = ({ children }) => {
         handleChangeModal,
         order,
         handleAddOrder,
+        handleEditQuantity,
       }}
     >
       {children}

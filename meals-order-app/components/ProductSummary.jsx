@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { formatMoney } from "../helpers";
+import useMealsOrder from "../hooks/useMealsOrder";
 
 const ProductSummary = ({ product }) => {
+  const { handleEditQuantity } = useMealsOrder();
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
       <div className="md:w-1/6">
@@ -28,6 +30,7 @@ const ProductSummary = ({ product }) => {
         <button
           type="button"
           className="bg-sky-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full text-center "
+          onClick={() => handleEditQuantity(product.id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
