@@ -11,6 +11,7 @@ const MealsOrderProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  const [name, setName] = useState("");
 
   const router = useRouter();
 
@@ -30,7 +31,7 @@ const MealsOrderProvider = ({ children }) => {
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCurrentCategory(category[0]);
-    router.push("/"); // Siempre que selecciones una categoría, te va 
+    router.push("/"); // Siempre que selecciones una categoría, te va
     // redirigir al menú
   };
 
@@ -84,6 +85,8 @@ const MealsOrderProvider = ({ children }) => {
         handleAddOrder,
         handleEditQuantity,
         handleDeleteProduct,
+        name,
+        setName
       }}
     >
       {children}
