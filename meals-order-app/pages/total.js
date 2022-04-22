@@ -1,22 +1,18 @@
 import { useEffect, useCallback } from "react";
 import Layout from "../layout/Layout";
 import useMealsOrder from "../hooks/useMealsOrder";
+import {formatMoney} from "../helpers";
 
 export default function Total() {
-  const { order, name, setName } = useMealsOrder();
+  const { order, name, setName, saveOrder, total } = useMealsOrder();
 
   const checkOrder = useCallback(() => {
     return order.length === 0 || name === "" || name.length < 3;
-  }, [order,name]);
+  }, [order, name]);
 
   useEffect(() => {
     checkOrder();
   }, [order, checkOrder]);
-
-  const saveOrder = (e) => {
-    e.preventDefault();
-    console.log("Guardar pedido..");
-  };
 
   return (
     <Layout page="Total y Confirmar Pedido">
@@ -43,7 +39,7 @@ export default function Total() {
 
         <div className="mt-10">
           <p className="text-2xl">
-            Total a pagar: {""} <span className="font-bold">200€</span>
+            Total a pagar: {""} <span className="font-bold">{formatMoney(total)}</span>
           </p>
         </div>
 

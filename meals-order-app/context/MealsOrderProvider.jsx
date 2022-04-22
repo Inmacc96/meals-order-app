@@ -12,6 +12,7 @@ const MealsOrderProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
   const [name, setName] = useState("");
+  const [total, setTotal] = useState(0);
 
   const router = useRouter();
 
@@ -27,6 +28,14 @@ const MealsOrderProvider = ({ children }) => {
   useEffect(() => {
     setCurrentCategory(categories[0]);
   }, [categories]);
+
+  useEffect(() => {
+    const newTotal = order.reduce(
+      (total, product) => product.price * product.quantity + total,
+      0
+    );
+    setTotal(newTotal);
+  }, [order]);
 
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
@@ -71,6 +80,13 @@ const MealsOrderProvider = ({ children }) => {
     setOrder(updatedOrder);
   };
 
+  const saveOrder = (e) => {
+    e.preventDefault();
+    console.log(order);
+    console.log(name);
+    console.log(total)
+  };
+
   return (
     <MealsOrderContext.Provider
       value={{
@@ -86,7 +102,9 @@ const MealsOrderProvider = ({ children }) => {
         handleEditQuantity,
         handleDeleteProduct,
         name,
-        setName
+        setName,
+        saveOrder,
+        total
       }}
     >
       {children}
