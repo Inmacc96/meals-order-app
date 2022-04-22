@@ -80,11 +80,20 @@ const MealsOrderProvider = ({ children }) => {
     setOrder(updatedOrder);
   };
 
-  const saveOrder = (e) => {
+  const saveOrder = async (e) => {
     e.preventDefault();
-    console.log(order);
-    console.log(name);
-    console.log(total)
+
+    try {
+      const { data } = await axios.post("/api/orders", {
+        orderInfo: order,
+        name,
+        total,
+        date: Date.now().toString(),
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -104,7 +113,7 @@ const MealsOrderProvider = ({ children }) => {
         name,
         setName,
         saveOrder,
-        total
+        total,
       }}
     >
       {children}
