@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const MealsOrderContext = createContext();
 
@@ -10,6 +11,8 @@ const MealsOrderProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -27,6 +30,8 @@ const MealsOrderProvider = ({ children }) => {
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCurrentCategory(category[0]);
+    router.push("/"); // Siempre que selecciones una categoría, te va 
+    // redirigir al menú
   };
 
   const handleSetProduct = (product) => {
@@ -60,10 +65,10 @@ const MealsOrderProvider = ({ children }) => {
     setModal(!modal);
   };
 
-  const handleDeleteProduct =(id) => {
+  const handleDeleteProduct = (id) => {
     const updatedOrder = order.filter((product) => product.id !== id);
-    setOrder(updatedOrder)
-  }
+    setOrder(updatedOrder);
+  };
 
   return (
     <MealsOrderContext.Provider
@@ -78,7 +83,7 @@ const MealsOrderProvider = ({ children }) => {
         order,
         handleAddOrder,
         handleEditQuantity,
-        handleDeleteProduct
+        handleDeleteProduct,
       }}
     >
       {children}
