@@ -84,13 +84,23 @@ const MealsOrderProvider = ({ children }) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/api/orders", {
+      await axios.post("/api/orders", {
         orderInfo: order,
         name,
         total,
         date: Date.now().toString(),
       });
-      console.log(data);
+
+      // Reset app
+      setCurrentCategory(categories[0]);
+      setOrder([]);
+      setName("");
+
+      toast.success("Pedido Realizado Correctamente");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
